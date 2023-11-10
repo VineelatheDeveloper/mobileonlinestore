@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Method Selection</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Select a Payment Method</h2>
+    <form id="paymentForm">
+      <label for="paymentMethod">Payment Method:</label>
+      <select id="paymentMethod" required>
+        <option value="creditCard">Credit Card</option>
+        <option value="debitCard">Debit Card</option>
+        <option value="netBanking">Net Banking</option>
+        <option value="wallet">Wallet/PostPaid</option>
+        <option value="cashOnDelivery">Cash On Delivery</option>
+      </select><br /><br />
+
+      <button type="button" onclick="proceedToConfirmation()">
+        Proceed to Confirmation
+      </button>
+    </form>
+  </div>
+
+  <script>
+    function proceedToConfirmation() {
+      const selectedPaymentMethod =
+        document.getElementById("paymentMethod").value;
+
+      // Retrieve the address details from the query parameters
+      const queryParams = new URLSearchParams(window.location.search);
+      const name = queryParams.get("name");
+      const address = queryParams.get("address");
+      const mobile = queryParams.get("mobile");
+      const alternateMobile = queryParams.get("alternateMobile");
+      const addressType = queryParams.get("addressType");
+      const image = queryParams.get("image");
+
+      // Create a URL with query parameters to pass all the details to the confirmation.html page
+      const url = `confirmation.html?image=${image}&name=${encodeURIComponent(
+        name
+      )}&address=${encodeURIComponent(address)}&mobile=${encodeURIComponent(
+        mobile
+      )}&alternateMobile=${encodeURIComponent(
+        alternateMobile
+      )}&addressType=${encodeURIComponent(
+        addressType
+      )}&paymentMethod=${encodeURIComponent(selectedPaymentMethod)}`;
+
+      // Redirect the user to the confirmation.html page with all the details
+      window.location.href = url;
+    }
+  </script>
+</body>
+
+</html>

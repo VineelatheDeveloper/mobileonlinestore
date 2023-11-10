@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content</title>
+  <!-- <a href="buy.html">Buying Page</a> -->
+</head>
+
+<body>
+  <div id="showcontent"></div>
+  <script>
+    const content = [
+      {
+        id: "image1",
+        name: "POCO C51",
+        brand: "POCO",
+        displaySize: "6.53 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 480",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 2 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "Android 11, MIUI 12",
+        price: "10500",
+      },
+      {
+        id: "image2",
+        name: "Redmi 11 Prime",
+        brand: "Redmi",
+        displaySize: "6.53 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "MediaTek Helio G80",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 8 MP + 5 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "MIUI 12 based on Android 11",
+        price: "$149",
+      },
+      {
+        id: "image3",
+        name: "Vivo V20",
+        brand: "Vivo",
+        displaySize: "6.44 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 720G",
+        RAM: "8 GB",
+        storage: "128 GB",
+        rearCamera: "64 MP + 8 MP + 2 MP",
+        frontCamera: "44 MP",
+        battery: "4000 mAh",
+        operatingSystem: "Funtouch OS 11 based on Android 11",
+        price: "$299",
+      },
+      {
+        id: "image4",
+        name: "Realme 10 Pro 5G",
+        brand: "Realme",
+        displaySize: "6.4 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 750G",
+        RAM: "6 GB",
+        storage: "128 GB",
+        rearCamera: "64 MP + 8 MP + 2 MP + 2 MP",
+        frontCamera: "16 MP",
+        battery: "4500 mAh",
+        operatingSystem: "Realme UI 2.0 based on Android 11",
+        price: "$279",
+      },
+      {
+        id: "image5",
+        name: "Micromax P22",
+        brand: "Micromax",
+        displaySize: "6.52 inches",
+        resolution: "720 x 1600 pixels",
+        processor: "MediaTek Helio G80",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 2 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "Stock Android 11",
+        price: "$119",
+      },
+    ];
+
+    function getParameterByName(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const selectedImageID = getParameterByName("image");
+    const selectedContent = content.find(
+      (item) => item.id === selectedImageID
+    );
+
+    if (selectedContent) {
+      const htmlContent = `
+                <h2>${selectedContent.name}</h2>
+                <p><strong>Brand:</strong> ${selectedContent.brand}</p>
+                <p><strong>Display Size:</strong> ${selectedContent.displaySize}</p>
+                <p><strong>Resolution:</strong> ${selectedContent.resolution}</p>
+                <p><strong>Processor:</strong> ${selectedContent.processor}</p>
+                <p><strong>RAM:</strong> ${selectedContent.RAM}</p>
+                <p><strong>Storage:</strong> ${selectedContent.storage}</p>
+                <p><strong>Rear Camera:</strong> ${selectedContent.rearCamera}</p>
+                <p><strong>Front Camera:</strong> ${selectedContent.frontCamera}</p>
+                <p><strong>Battery:</strong> ${selectedContent.battery}</p>
+                <p><strong>Operating System:</strong> ${selectedContent.operatingSystem}</p>
+                <p><strong>Price:</strong> ${selectedContent.price}</p>
+            `;
+
+      const showContentDiv = document.getElementById("showcontent");
+      showContentDiv.innerHTML = htmlContent;
+    } else {
+      console.log(`Content with ID '${selectedImageID}' not found.`);
+    }
+  </script>
+
+  <div class="fourth-container" style="display: none">
+    <form id="formid">
+      <input type="number" id="numberid" placeholder="House No/Flat/Door No" required />
+      <input type="text" id="nameid" placeholder="Enter your Full Name" required />
+      <input type="number" id="mobileid" placeholder="10 Digit Mobile Number" required />
+      <input type="number" id="altermobileid" placeholder="Alternate Mobile Number" required />
+      <!-- <button type="button" id="myButton" onclick="goToBuyPage()">Click Me</button> -->
+
+      <p>Type of Address</p>
+      <p>
+        <span><button>Home</button></span>
+        <span><button>Work</button></span>
+      </p>
+    </form>
+  </div>
+
+  <button onclick="goToBuyPage()">BUY NOW</button>
+  <script>
+    function goToBuyPage() {
+      const houseNumber = document.getElementById("numberid").value;
+      const fullName = document.getElementById("nameid").value;
+      const mobileNumber = document.getElementById("mobileid").value;
+      const alternateMobileNumber =
+        document.getElementById("altermobileid").value;
+
+      // Create a URL with query parameters to pass the address details to buy.html
+      const url = `buy.html?image=${selectedImageID}&houseNumber=${encodeURIComponent(
+        houseNumber
+      )}&fullName=${encodeURIComponent(
+        fullName
+      )}&mobileNumber=${encodeURIComponent(
+        mobileNumber
+      )}&alternateMobileNumber=${encodeURIComponent(alternateMobileNumber)}`;
+
+      // Redirect the user to the buy.html page with the address details
+      window.location.href = url;
+    }
+  </script>
+</body>
+
+</html>

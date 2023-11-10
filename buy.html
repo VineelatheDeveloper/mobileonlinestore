@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Now</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="address-form">
+      <h2>Enter Your Address Details</h2>
+      <form id="addressForm">
+        <label for="name">Name of Buyer:</label>
+        <input type="text" id="name" required /><br /><br />
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" required /><br /><br />
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" required /><br /><br />
+
+        <label for="alternateMobile">Alternate Mobile Number:</label>
+        <input type="tel" id="alternateMobile" /><br /><br />
+
+        <!-- Type of Address (Home/Work) -->
+        <label for="addressType">Type of Address:</label>
+        <select id="addressType">
+          <option value="home">Home</option>
+          <option value="work">Work</option>
+        </select><br /><br />
+
+        <button type="button" onclick="proceedToPayment()">
+          Proceed to Payment
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function getParameterByName(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+    function proceedToPayment() {
+      const selectedImageID = getParameterByName("image");
+      const name = document.getElementById("name").value;
+      const address = document.getElementById("address").value;
+      const mobile = document.getElementById("mobile").value;
+      const alternateMobile =
+        document.getElementById("alternateMobile").value;
+      const addressType = document.getElementById("addressType").value;
+
+      // Create a URL with query parameters to pass the address details to payment.html
+      const url = `payment.html?image=${selectedImageID}&name=${encodeURIComponent(
+        name
+      )}&address=${encodeURIComponent(address)}&mobile=${encodeURIComponent(
+        mobile
+      )}&alternateMobile=${encodeURIComponent(
+        alternateMobile
+      )}&addressType=${encodeURIComponent(addressType)}`;
+
+      // Redirect the user to the payment.html page with the address details
+      window.location.href = url;
+    }
+  </script>
+</body>
+
+</html>

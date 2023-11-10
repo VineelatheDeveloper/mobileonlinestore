@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmation</title>
+</head>
+
+<body>
+  <h2>Confirmation</h2>
+
+  <!-- Display the selected product image -->
+  <img id="productImage" src="" alt="Selected Product" style="width: 200px;" />
+  <!-- Display the product content -->
+  <p><strong>Content:</strong>
+  <div id="productContent"></div>
+  </p>
+
+  <!-- Display the product price -->
+  <p><strong>Price:</strong> <span id="productPrice"></span></p>
+
+  <!-- Display the delivery address and payment method -->
+  <h2>Delivery Address:</h2>
+  <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+  <p><strong>Address:</strong> <span id="address"></span></p>
+  <p><strong>Mobile:</strong> <span id="mobile"></span></p>
+  <p><strong>Alternate Mobile:</strong> <span id="alternateMobile"></span></p>
+  <p><strong>Address Type:</strong> <span id="addressType"></span></p>
+
+  <h2>Payment Method:</h2>
+  <p><strong>Payment Method:</strong> <span id="paymentMethod"></span></p>
+
+  <!-- Button to submit and redirect to index.html -->
+  <button onclick="redirectToIndex()">Submit</button>
+
+  <script>
+    const content = [
+      {
+        id: "image1",
+        name: "POCO C51",
+        brand: "POCO",
+        displaySize: "6.53 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 480",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 2 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "Android 11, MIUI 12",
+        price: "10500",
+      },
+      {
+        id: "image2",
+        name: "Redmi 11 Prime",
+        brand: "Redmi",
+        displaySize: "6.53 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "MediaTek Helio G80",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 8 MP + 5 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "MIUI 12 based on Android 11",
+        price: "$149",
+      },
+      {
+        id: "image3",
+        name: "Vivo V20",
+        brand: "Vivo",
+        displaySize: "6.44 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 720G",
+        RAM: "8 GB",
+        storage: "128 GB",
+        rearCamera: "64 MP + 8 MP + 2 MP",
+        frontCamera: "44 MP",
+        battery: "4000 mAh",
+        operatingSystem: "Funtouch OS 11 based on Android 11",
+        price: "$299",
+      },
+      {
+        id: "image4",
+        name: "Realme 10 Pro 5G",
+        brand: "Realme",
+        displaySize: "6.4 inches",
+        resolution: "1080 x 2400 pixels",
+        processor: "Qualcomm Snapdragon 750G",
+        RAM: "6 GB",
+        storage: "128 GB",
+        rearCamera: "64 MP + 8 MP + 2 MP + 2 MP",
+        frontCamera: "16 MP",
+        battery: "4500 mAh",
+        operatingSystem: "Realme UI 2.0 based on Android 11",
+        price: "$279",
+      },
+      {
+        id: "image5",
+        name: "Micromax P22",
+        brand: "Micromax",
+        displaySize: "6.52 inches",
+        resolution: "720 x 1600 pixels",
+        processor: "MediaTek Helio G80",
+        RAM: "4 GB",
+        storage: "64 GB",
+        rearCamera: "13 MP + 2 MP + 2 MP",
+        frontCamera: "8 MP",
+        battery: "5000 mAh",
+        operatingSystem: "Stock Android 11",
+        price: "$119",
+      },
+    ];
+
+
+
+
+    // Function to redirect to index.html
+    function redirectToIndex() {
+      window.location.href = "index.html";
+    }
+
+    // Retrieve query parameters from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productImage = urlParams.get("image");
+    // const productContent = urlParams.get("content");
+    const productPrice = urlParams.get("productPrice");
+    const fullName = urlParams.get("name");
+    const address = urlParams.get("address");
+    const mobile = urlParams.get("mobile");
+    const alternateMobile = urlParams.get("alternateMobile");
+    const addressType = urlParams.get("addressType");
+    const paymentMethod = urlParams.get("paymentMethod");
+
+
+    const selectedImageID = productImage
+    const selectedContent = content.find(
+      (item) => item.id === selectedImageID
+    );
+
+    let productContent = ""
+
+    if (selectedContent) {
+      productContent = `
+                <h2>${selectedContent.name}</h2>
+                <p><strong>Brand:</strong> ${selectedContent.brand}</p>
+                <p><strong>Display Size:</strong> ${selectedContent.displaySize}</p>
+                <p><strong>Resolution:</strong> ${selectedContent.resolution}</p>
+                <p><strong>Processor:</strong> ${selectedContent.processor}</p>
+                <p><strong>RAM:</strong> ${selectedContent.RAM}</p>
+                <p><strong>Storage:</strong> ${selectedContent.storage}</p>
+                <p><strong>Rear Camera:</strong> ${selectedContent.rearCamera}</p>
+                <p><strong>Front Camera:</strong> ${selectedContent.frontCamera}</p>
+                <p><strong>Battery:</strong> ${selectedContent.battery}</p>
+                <p><strong>Operating System:</strong> ${selectedContent.operatingSystem}</p>
+                <p><strong>Price:</strong> ${selectedContent.price}</p>
+            `;
+
+
+    } else {
+      productContent = `Content with ID '${selectedImageID}' not found.`;
+    }
+
+    console.log(productContent);
+
+
+
+    // links if images by id
+
+    function getImageSrc(id) {
+      if (id == "image1")
+        return "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/o/t/a/c51-mzb0e6din-poco-original-imagzdzzraqzsrzc.jpeg?q=70"
+
+      else if (id == "image2")
+        return "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/k/h/z/11-prime-mzb0cerin-redmi-original-imagzqvrgdz98jch.jpeg?q=70"
+      else if (id == "image3")
+        return "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/c/s/x/-original-imagzjhwaaewgj8r.jpeg?q=70"
+      else if (id == "image4")
+        return "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/y/z/r/-original-imagkp8yzvqffyhc.jpeg?q=70"
+      else if (id == "image5")
+        return "https://rukminim2.flixcart.com/image/832/832/xif0q/mobile/t/v/5/j22-j-22-micromax-original-imaggbqykt9jkhqk.jpeg?q=70"
+    }
+
+    // Update the content with retrieved values
+    document.getElementById("productImage").src = getImageSrc(productImage);
+    document.getElementById("productContent").innerHTML = productContent;
+    document.getElementById("productPrice").textContent = productPrice;
+    document.getElementById("fullName").textContent = fullName;
+    document.getElementById("address").textContent = address;
+    document.getElementById("mobile").textContent = mobile;
+    document.getElementById("alternateMobile").textContent = alternateMobile;
+    document.getElementById("addressType").textContent = addressType;
+    document.getElementById("paymentMethod").textContent = paymentMethod;
+  </script>
+</body>
+
+</html>
